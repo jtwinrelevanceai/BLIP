@@ -76,10 +76,14 @@ def save_result(result, result_dir, filename, remove_duplicate=''):
     return final_result_file
 
 
-
-from pycocotools.coco import COCO
-from pycocoevalcap.eval import COCOEvalCap
-from torchvision.datasets.utils import download_url
+try:
+    from pycocotools.coco import COCO
+    from pycocoevalcap.eval import COCOEvalCap
+    from torchvision.datasets.utils import download_url
+except:
+    import traceback
+    
+    traceback.print_exc()
 
 def coco_caption_eval(coco_gt_root, results_file, split):
     urls = {'val':'https://storage.googleapis.com/sfr-vision-language-research/datasets/coco_karpathy_val_gt.json',
